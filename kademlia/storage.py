@@ -1,6 +1,6 @@
 import time
-from itertools import izip
-from itertools import imap
+# from itertools import zip
+# from itertools import map
 from itertools import takewhile
 import operator
 from collections import OrderedDict
@@ -46,16 +46,16 @@ class ForgetfulStorage(object):
         minBirthday = time.time() - secondsOld
         zipped = self._tripleIterable()
         matches = takewhile(lambda r: minBirthday >= r[1], zipped)
-        return imap(operator.itemgetter(0, 2), matches)
+        return map(operator.itemgetter(0, 2), matches)
 
     def _tripleIterable(self):
         ikeys = self.data.iterkeys()
-        ibirthday = imap(operator.itemgetter(0), self.data.itervalues())
-        ivalues = imap(operator.itemgetter(1), self.data.itervalues())
-        return izip(ikeys, ibirthday, ivalues)
+        ibirthday = map(operator.itemgetter(0), self.data.itervalues())
+        ivalues = map(operator.itemgetter(1), self.data.itervalues())
+        return zip(ikeys, ibirthday, ivalues)
 
     def iteritems(self):
         self.cull()
         ikeys = self.data.iterkeys()
-        ivalues = imap(operator.itemgetter(1), self.data.itervalues())
-        return izip(ikeys, ivalues)
+        ivalues = map(operator.itemgetter(1), self.data.itervalues())
+        return zip(ikeys, ivalues)

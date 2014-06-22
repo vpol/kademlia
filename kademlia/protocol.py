@@ -43,7 +43,7 @@ class KademliaProtocol(RPCProtocol):
         return True
 
     def rpc_find_node(self, sender, nodeid, key):
-        self.log.info("finding neighbors of %i in local table" % long(nodeid.encode('hex'), 16))
+        self.log.info("finding neighbors of %i in local table" % int(nodeid.encode('hex'), 16))
         source = Node(nodeid, sender[0], sender[1])
         self.router.addContact(source)
         node = Node(key)
